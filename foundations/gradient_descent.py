@@ -3,11 +3,13 @@ class Solution:
         # Objective function: f(x) = x^2
         # Derivative:         f'(x) = 2x
         # Update rule:        x = x - learning_rate * f'(x)
-        # Round final answer to 5 decimal places
-
-        result = init
+        # Round final answer to 5 decimal places        minimizer = init
         
         for _ in range(iterations):
-            result -= (2 * result * learning_rate)
+            derivative = 2 * minimizer
+            minimizer -= derivative * learning_rate
 
-        return round(result, 5)
+        return round(minimizer, 5)
+
+
+
