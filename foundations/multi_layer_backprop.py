@@ -30,32 +30,33 @@ class Solution:
         # forward pass
         # ==================
 
-        # layer 1
-        z1 = x @ W1.T + b1     # l1 pre-act
-        a1 = np.maximum(z1, 0)      # relu act
+        # layer 1 - pre-act + act
+        z1 = x @ W1.T + b1    
+        a1 = np.maximum(z1, 0)     
 
-        # layer 2
-        z2 = a2 = a1 @ W2.T + b2              # l2 pre-act 
-        loss = np.mean((z2 - y_true) ** 2)  # loss
+        # layer 2 - pre-act + act
+        z2 = a2 = a1 @ W2.T + b2             
+        # no l2 activation
+
+        # output - loss
+        loss = np.mean((z2 - y_true) ** 2) 
 
         # ==================
         # backward pass
         # ==================
 
-        # loss derivative
+        # output - loss derivative
         dz2 = 2 * (z2 - y_true) / len(y_true)
 
-        # layer 2 parameter gradients
+        # layer 2 - pre-act + act
         dW2 = np.outer(dz2, a1)
         db2 = dz2
 
-        # gradient propagated back to layer 1 activation
+        # propagate gradient to l2 to l1
         da1 = dz2 @ W2
-
-        # relu deriv - layer 1
         dz1 = da1 * (z1 > 0)
 
-        # layer 1 parameter gradients
+        # layer 1 - pre-act + act
         dW1 = np.outer(dz1, x)
         db1 = dz1
     
