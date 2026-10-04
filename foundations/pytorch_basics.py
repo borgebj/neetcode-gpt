@@ -28,8 +28,4 @@ class Solution:
         # Computes Mean Squared Error between prediction and target
 
         mean = torch.nn.functional.mse_loss(prediction, target)
-
-        print(prediction)
-        print(target)
-        pass
         return torch.round(mean, decimals=4)
