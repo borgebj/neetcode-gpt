@@ -1,0 +1,35 @@
+import torch
+import torch.nn
+from torchtyping import TensorType
+
+
+class Solution:
+
+    def reshape(self, to_reshape: TensorType[float]) -> TensorType[float]:
+        # Reshapes (M, N) tensor to (M*N/2, 2)
+
+        M, N = to_reshape.shape
+        reshaped = torch.reshape(to_reshape, (M * N//2, 2))
+        return torch.round(reshaped, decimals=4)
+
+    def average(self, to_avg: TensorType[float]) -> TensorType[float]:
+        # Computes column-wise mean (average across rows)
+
+        avg = torch.mean(to_avg, dim=0)
+        return torch.round(avg, decimals=4)
+
+    def concatenate(self, cat_one: TensorType[float], cat_two: TensorType[float]) -> TensorType[float]:
+        # Joins two tensors side-by-side along dim=1
+
+        cat = torch.cat((cat_one, cat_two), dim=1)
+        return torch.round(cat, decimals=4)
+
+    def get_loss(self, prediction: TensorType[float], target: TensorType[float]) -> TensorType[float]:
+        # Computes Mean Squared Error between prediction and target
+
+        mean = torch.nn.functional.mse_loss(prediction, target)
+
+        print(prediction)
+        print(target)
+        pass
+        return torch.round(mean, decimals=4)
