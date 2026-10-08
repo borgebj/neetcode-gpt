@@ -8,6 +8,9 @@ import numpy as np
 class Solution:
 
     def xavier_init(self, fan_in: int, fan_out: int) -> List[List[float]]:
+        # xavier (Glorot) initialization:
+        # - keeps activation variance stable across layers
+        # - comminly used with sigmoid/tanh activatiins
         torch.manual_seed(0)
 
         std = (2 / (fan_in + fan_out)) ** 0.5
@@ -15,13 +18,18 @@ class Solution:
 
         return weights.round(decimals=4).tolist()
 
+
     def kaiming_init(self, fan_in: int, fan_out: int) -> List[List[float]]:
+        # Kaiming (He) initialization:
+        # - designed for ReLU networks
+        # - helps activation variance stable through the layers
         torch.manual_seed(0)
 
         std = (2 / fan_in) ** 0.5
         weights = torch.randn(fan_out, fan_in) * std
 
         return weights.round(decimals=4).tolist()
+
 
     def check_activations(self, num_layers: int, input_dim: int, hidden_dim: int, init_type: str) -> List[float]:
         torch.manual_seed(0)
