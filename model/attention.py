@@ -41,7 +41,6 @@ class SingleHeadAttention(nn.Module):
 
         # 4. Apply softmax over the key-token dimension
         scores = torch.softmax(attention_scores, dim=2)
-        print(scores)
 
         # 5. Return (scores @ V) rounded to 4 decimal places
         return torch.round((scores @ V), decimals=4)
