@@ -17,7 +17,7 @@ class Solution:
         # [1]  -  second token
         positions = np.arange(seq_len).reshape(-1, 1)
 
-        # pairs from 0 to n-dimensions
+        # pairs from 0 to n-dimensions [0, 2, 4, ...]
         pairs = np.arange(0, d_model, 2)
 
         # frequency denominators
