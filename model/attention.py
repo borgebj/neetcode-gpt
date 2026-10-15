@@ -7,6 +7,8 @@ class SingleHeadAttention(nn.Module):
     def __init__(self, embedding_dim: int, attention_dim: int):
         super().__init__()
         torch.manual_seed(0)
+        # embedding_dim:  n-dimensions / features each embedding have
+        # attention_dim:  output feature size from attention layer
 
         # Self-attention layer
         self.key = nn.Linear(embedding_dim, attention_dim, bias=False)   # K (Key)
@@ -15,6 +17,8 @@ class SingleHeadAttention(nn.Module):
 
 
     def forward(self, embedded: TensorType[float]) -> TensorType[float]:
+        # embedded:  embeddings for all tokens in input sequence
+
         # 1. Projects input through K, Q, V linear layers
         K = self.key(embedded)
         Q = self.query(embedded)
