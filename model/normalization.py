@@ -15,7 +15,7 @@ class Solution:
         eps = 1e-5                  # counters div. by zero
         x_hat = (x - mean) / np.sqrt(var + eps)
 
-        # scales and shirts
+        # scales and shifts
         out = gamma * x_hat + beta
 
         return np.round(out, 5)
