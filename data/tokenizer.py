@@ -1,13 +1,15 @@
 from typing import List
+from collections import Counter
 
 
 class Solution:
 
-    def get_pair_frequencies(self, corpus) -> Counter:
+    def get_pair_frequencies(self, tokens: List[str]) -> Counter:
         # counts freqencies
+
         pairs = Counter()
-        for i in range(len(corpus) - 1):
-            pair = (corpus[i], corpus[i + 1])
+        for i in range(len(tokens) - 1):
+            pair = (tokens[i], tokens[i + 1])
             pairs[pair] += 1
         
         return pairs
@@ -15,20 +17,22 @@ class Solution:
     def get_merges(self, corpus: str, num_merges: int) -> List[List[str]]:
         # corpus:     input text, e.g. "abcabc"
         # num_merges: how many merges, e.g. 2, "abcabc" -> "[abc","abc"]
-        
+        #
+        # returns:  rules BPE learned
+
         tokens = list(corpus)
         merges = []
-
-        print("corpus: ", corpus)
-        print()
-
+        
         for _ in range(num_merges):
 
-            # 1. count pairs in current tokens
+            # 1. Count frequencies of adjacent tokens in the current sequence
             pairs = self.get_pair_frequencies(tokens)
 
         
-            # 2. finds most freq pair, breaking ties lexicographically
+            # 2. Select the most frequent pair; break ties lexicographically
+            if not pairs:
+                break
+
             highest = max(pairs.values())
             highest_pairs = [
                 pair for pair,count in pairs.items() 
@@ -53,12 +57,4 @@ class Solution:
             merges.append(list(most_freq))
             tokens = new_tokens
 
-            print()
-            print("tokens: ", tokens)
-            print("highest:", most_freq)
-            print("new:    ", new_tokens)
-
-        print()
-        print(tokens)
-        
         return merges
