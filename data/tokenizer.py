@@ -1,6 +1,11 @@
 from typing import List
 from collections import Counter
 
+# ======
+# useful:
+# https://www.geeksforgeeks.org/nlp/byte-pair-encoding-bpe-in-nlp/
+# ======
+
 
 class Solution:
 
