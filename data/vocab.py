@@ -14,11 +14,11 @@ class Solution:
         return stoi, itos
 
     def encode(self, text: str, stoi: Dict[str, int]) -> List[int]:
-        # Converts a string to a list of integers using stoi mapping
+        # converts string to ids:  "hello" > [1,0,2,2,3]
         return [stoi[ch] for ch in text]
 
 
     def decode(self, ids: List[int], itos: Dict[int, str]) -> str:
-        # Convert a list of integers back to a string using itos mapping
+        # converts ids to string:  [1,0,2,2,3] > "hello"
         return  ''.join(itos[id] for id in ids)
         
