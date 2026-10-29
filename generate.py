@@ -35,5 +35,4 @@ class Solution:
             context = torch.cat((context, next_token), dim=-1)
             result.append(next_char)
 
-
         return ''.join(result)
