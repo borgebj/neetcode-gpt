@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 from torchtyping import TensorType
 
-# 1. Remember to include an additional LayerNorm after the block sequence and before the final linear layer
-# 2. Instantiate in the following order: Word embeddings, position embeddings, transformer blocks, final layer norm, and vocabulary projection.
 class GPT(nn.Module):
 
     def __init__(self, vocab_size: int, context_length: int, model_dim: int, num_blocks: int, num_heads: int):
